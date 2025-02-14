@@ -7,6 +7,7 @@ import boomImage from './boom.gif';
 import heartsGif from './hearts.gif'; // Import the hearts GIF
 import loveSong from './love-song.mp3';
 import jabadabado from './jabadabado.mp3'; // Import the new audio file
+import meImage from './me.jpg'; // Import the me.jpg image for waterfall effect
 
 export default function App() {
   const [showConfetti, setShowConfetti] = useState(false);
@@ -14,6 +15,7 @@ export default function App() {
   const [imageSize, setImageSize] = useState("50vw"); // Make image responsive
   const [imageSrc, setImageSrc] = useState(loveImage);
   const [showHearts, setShowHearts] = useState(false);
+  const [fallingImages, setFallingImages] = useState([]); // State to hold the falling images
   const noButtonRef = useRef(null);
   const audioRef = useRef(new Audio(loveSong));
   const jabadabadoRef = useRef(new Audio(jabadabado));
@@ -28,6 +30,18 @@ export default function App() {
     jabadabadoRef.current.onplay = () => {
       audioRef.current.play();
     };
+
+    // Create falling images
+    const numberOfImages = 200; // Adjust how many images fall
+    let images = [];
+    for (let i = 0; i < numberOfImages; i++) {
+      images.push({
+        id: i,
+        left: `${Math.random() * 100}vw`, // Random horizontal position
+        animationDuration: `${Math.random() * 3 + 3}s`, // Random speed
+      });
+    }
+    setFallingImages(images); // Add falling images to state
   };
 
   const handleMouseMove = (event) => {
@@ -63,6 +77,7 @@ export default function App() {
         zIndex: -1,
       }}
     >
+      {/* Confetti */}
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
@@ -75,13 +90,36 @@ export default function App() {
         />
       )}
 
+      {/* Falling images */}
+      {fallingImages.map((image) => (
+        <motion.div
+          key={image.id}
+          style={{
+            position: "absolute",
+            left: image.left,
+            top: "-100px", // Start above the screen
+            width: "30px", // Adjust size of the falling images
+          }}
+          animate={{
+            top: "100vh", // Move image to the bottom of the screen
+          }}
+          transition={{
+            duration: parseFloat(image.animationDuration),
+            ease: "linear",
+            repeat: Infinity,
+          }}
+        >
+          <img src={meImage} alt="Falling Image" />
+        </motion.div>
+      ))}
+
       {showSideImages && (
         <div className="absolute left-10 transform translate-1/2">
           <img
             src={boomImage}
             alt="Boom!"
             className="animate-bounce side-image left-image"
-            style={{ width: "500px",height: "500px" }}
+            style={{ width: "500px", height: "500px" }}
           />
         </div>
       )}
@@ -119,7 +157,7 @@ export default function App() {
             src={boomImage}
             alt="Boom!"
             className="animate-bounce side-image right-image"
-            style={{ width: "500px",height: "500px" }}
+            style={{ width: "500px", height: "500px" }}
           />
         </div>
       )}
