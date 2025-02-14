@@ -76,7 +76,7 @@ export default function App() {
       )}
 
       {showSideImages && (
-        <div className="absolute left-4 top-1/4">
+        <div className="absolute left-10 transform translate-1/2">
           <img
             src={boomImage}
             alt="Boom!"
@@ -114,7 +114,7 @@ export default function App() {
       </div>
 
       {showSideImages && (
-        <div className="absolute right-4 top-1/4">
+        <div className="absolute right-10 transform translate-1/2">
           <img
             src={boomImage}
             alt="Boom!"
