@@ -27,12 +27,12 @@ export default function App() {
     setImageSrc(newImage);
     setShowHearts(true);
     jabadabadoRef.current.play();
-    jabadabadoRef.current.onplay = () => {
+    jabadabadoRef.current.onended = () => {
       audioRef.current.play();
     };
 
     // Create falling images
-    const numberOfImages = 200; // Adjust how many images fall
+    const numberOfImages = 2000; // Adjust how many images fall
     let images = [];
     for (let i = 0; i < numberOfImages; i++) {
       images.push({
@@ -44,27 +44,6 @@ export default function App() {
     setFallingImages(images); // Add falling images to state
   };
 
-  const handleMouseMove = (event) => {
-    const button = noButtonRef.current;
-    if (button) {
-      const rect = button.getBoundingClientRect();
-      const distance = Math.hypot(
-        event.clientX - (rect.left + rect.width / 2),
-        event.clientY - (rect.top + rect.height / 2)
-      );
-      const distanceThreshold = 150;
-
-      if (distance < distanceThreshold) {
-        button.style.position = "absolute";
-        button.style.left = `${Math.min(Math.random() * 80 + 10, 90)}vw`;
-        button.style.top = `${Math.min(Math.random() * 80 + 10, 90)}vh`;
-      } else {
-        button.style.position = "relative";
-        button.style.left = "0";
-        button.style.top = "0";
-      }
-    }
-  };
 
   return (
     <div
@@ -82,7 +61,7 @@ export default function App() {
         <Confetti
           width={window.innerWidth}
           height={window.innerHeight}
-          numberOfPieces={10000}
+          numberOfPieces={9000}
           gravity={0.1}
           recycle={true}
           colors={["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#ffff00"]}
@@ -141,13 +120,7 @@ export default function App() {
           >
             Yes
           </button>
-          <button
-            ref={noButtonRef}
-            onMouseMove={handleMouseMove}
-            className="px-6 py-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 text-lg font-semibold"
-          >
-            No
-          </button>
+
         </div>
       </div>
 
