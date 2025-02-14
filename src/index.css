@@ -5,9 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffe1f9; /* Light pink Valentine's theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden; /* Prevents unnecessary scrolling */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.side-image {
+  position: fixed; /* Ensure the images are fixed in place */
+  width: 150px;
+  height: 150px;
+  animation: bounce 1.5s infinite;
+  z-index: 20; /* Ensure images are above other elements */
 }
+
+.left-image {
+  left: 0.5%; /* Align to the left side of the viewport */
+  bottom: 20%; /* Keep it slightly off the bottom */
+}
+
+.right-image {
+  right: 0.5%; /* Align to the right side of the viewport */
+  bottom: 20%; /* Keep it slightly off the bottom */
+}
+
