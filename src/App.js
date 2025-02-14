@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Confetti from "react-confetti";
 import { motion } from "framer-motion";
-import loveImage from './love.jpeg';
+import loveImage from './love.jpg';
 import newImage from './yippee-happy.gif';
 import boomImage from './boom.gif';
 import heartsGif from './hearts.gif'; // Import the hearts GIF
