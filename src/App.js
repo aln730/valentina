@@ -81,7 +81,7 @@ export default function App() {
             src={boomImage}
             alt="Boom!"
             className="animate-bounce side-image left-image"
-            style={{ width: "30vw", maxWidth: "150px", height: "auto" }}
+            style={{ width: "500px",height: "500px" }}
           />
         </div>
       )}
