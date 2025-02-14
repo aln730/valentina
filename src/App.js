@@ -72,7 +72,6 @@ export default function App() {
           recycle={true}
           colors={["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#ffff00"]}
           initialVelocityY={15}
-          wind={0.1}
         />
       )}
 
