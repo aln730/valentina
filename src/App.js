@@ -61,7 +61,7 @@ export default function App() {
         <Confetti
           width={window.innerWidth}
           height={window.innerHeight}
-          numberOfPieces={9000}
+          numberOfPieces={2500}
           gravity={0.1}
           recycle={true}
           colors={["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#ffff00"]}
@@ -77,7 +77,7 @@ export default function App() {
             position: "absolute",
             left: image.left,
             top: "-100px", // Start above the screen
-            width: "30px", // Adjust size of the falling images
+            width: "50px", // Adjust size of the falling images
           }}
           animate={{
             top: "100vh", // Move image to the bottom of the screen
