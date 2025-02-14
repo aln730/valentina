@@ -11,8 +11,12 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden; /* Prevents unnecessary scrolling */
+  background-image: url('hearts.gif'); /* Use hearts.gif as the background */
+  background-position: center center; /* Keep the gif centered */
+  background-repeat: repeat; /* Repeat the gif to fill the screen */
+  z-index: -1; /* Ensure the gif stays behind all other content */
+  text-align: center; /* Ensure text is centered */
 }
-
 
 .side-image {
   position: fixed; /* Ensure the images are fixed in place */
@@ -32,3 +36,28 @@ body {
   bottom: 20%; /* Keep it slightly off the bottom */
 }
 
+/* Button styles */
+button {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative; /* Ensure button is positioned relative by default */
+  margin: 10px; /* Add some space around the button */
+}
+
+button:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: scale(0.98); /* Add a small scaling effect on button press */
+}
+
+button:focus {
+  outline: none; /* Removes the default outline */
+}
