@@ -80,7 +80,7 @@ export default function App() {
           <img
             src={boomImage}
             alt="Boom!"
-            className="animate-bounce"
+            className="animate-bounce side-image left-image"
             style={{ width: "30vw", maxWidth: "150px", height: "auto" }}
           />
         </div>
@@ -118,8 +118,8 @@ export default function App() {
           <img
             src={boomImage}
             alt="Boom!"
-            className="animate-bounce"
-            style={{ width: "30vw", maxWidth: "150px", height: "auto" }}
+            className="animate-bounce side-image right-image"
+            style={{ width: "500px",height: "500px" }}
           />
         </div>
       )}
