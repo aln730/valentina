@@ -11,19 +11,19 @@ import jabadabado from './jabadabado.mp3'; // Import the new audio file
 export default function App() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [showSideImages, setShowSideImages] = useState(false);
-  const [imageSize, setImageSize] = useState(500);
+  const [imageSize, setImageSize] = useState("50vw"); // Make image responsive
   const [imageSrc, setImageSrc] = useState(loveImage);
-  const [showHearts, setShowHearts] = useState(false); // State for showing the hearts GIF
+  const [showHearts, setShowHearts] = useState(false);
   const noButtonRef = useRef(null);
   const audioRef = useRef(new Audio(loveSong));
-  const jabadabadoRef = useRef(new Audio(jabadabado)); // Reference for the new MP3 file
+  const jabadabadoRef = useRef(new Audio(jabadabado));
 
   const handleYesClick = () => {
     setShowConfetti(true);
     setShowSideImages(true);
-    setImageSize(600);
+    setImageSize("60vw");
     setImageSrc(newImage);
-    setShowHearts(true); // Show hearts when "Yes" is clicked
+    setShowHearts(true);
     jabadabadoRef.current.play();
     jabadabadoRef.current.onplay = () => {
       audioRef.current.play();
@@ -38,15 +38,13 @@ export default function App() {
         event.clientX - (rect.left + rect.width / 2),
         event.clientY - (rect.top + rect.height / 2)
       );
-      const distanceThreshold = 150; // Only move the button if the mouse is within this distance
+      const distanceThreshold = 150;
 
       if (distance < distanceThreshold) {
-        // Random position for button when close to mouse
         button.style.position = "absolute";
-        button.style.left = `${Math.random() * 80 + 10}%`;
-        button.style.top = `${Math.random() * 80 + 10}%`;
+        button.style.left = `${Math.min(Math.random() * 80 + 10, 90)}vw`;
+        button.style.top = `${Math.min(Math.random() * 80 + 10, 90)}vh`;
       } else {
-        // Reset position to its original place when mouse is farther
         button.style.position = "relative";
         button.style.left = "0";
         button.style.top = "0";
@@ -56,74 +54,72 @@ export default function App() {
 
   return (
     <div
-      className="flex justify-center fill items-center min-h-screen bg-pink-1000 absolute"
+      className="flex justify-center items-center min-h-screen bg-pink-1000 relative"
       style={{
         backgroundImage: showHearts ? `url(${heartsGif})` : 'none',
-        backgroundRepeat: 'repeat', // Don't repeat the GIF
-        backgroundAttachment: 'relative', // Make sure the background stays fixed during scrolling
-        zIndex: -1, // Make sure the GIF stays behind all other elements
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        zIndex: -1,
       }}
     >
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
           height={window.innerHeight}
-          numberOfPieces={10000} // Adjust number of pieces
-          gravity={20} // Adjust gravity to slow down the fall
+          numberOfPieces={10000}
+          gravity={0.1}
           recycle={true}
           colors={["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#ffff00"]}
-          initialVelocityY={25} // Add initial speed for pieces
-          wind={0.1} // Add wind for randomness
-          angle={Math.random() * 360} // Random angle for each piece to come from
+          initialVelocityY={15}
         />
       )}
 
-      {/* Left Image (Only appears when Yes is clicked) */}
       {showSideImages && (
-        <div className="absolute left-10 transform translate-y-1/2">
+        <div className="absolute left-10 transform translate-1/2">
           <img
             src={boomImage}
             alt="Boom!"
             className="animate-bounce side-image left-image"
-            style={{ width: "500px", height: "500px" }}
+            style={{ width: "30vw", maxWidth: "150px", height: "auto" }}
           />
         </div>
       )}
 
-      <div className="flex flex-col items-center p-8 bg-white rounded-2xl shadow-2xl text-center relative z-10">
+      <div className="flex flex-col items-center p-4 bg-white rounded-2xl shadow-2xl text-center relative z-10 max-w-[90%] md:max-w-[60%]">
         <motion.img
           src={imageSrc}
           alt="Will you be my Valentine?"
-          className="mb-6 rounded-full shadow-lg"
-          animate={{ width: imageSize, height: imageSize, rotate: showConfetti ? 10 : 0 }}
+          className="mb-4 rounded-full shadow-lg"
+          animate={{ width: imageSize, height: "auto", rotate: showConfetti ? 10 : 0 }}
           transition={{ type: "spring", stiffness: 200 }}
+          style={{ maxWidth: "300px" }} // Limit size on mobile
         />
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 items-center justify-center absolute">Will you be my Valentine's? 💖</h2>
-        <div className="flex flex-col justify-center items-center gap-6">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">Will you be my Valentine? 💖</h2>
+        <div className="flex flex-col items-center gap-4">
           <button
             onClick={handleYesClick}
-            className="px-10 py-3 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 text-lg font-semibold justify-center"
+            className="px-6 py-2 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 text-lg font-semibold"
           >
             Yes
           </button>
           <button
             ref={noButtonRef}
             onMouseMove={handleMouseMove}
-            className="px-10 py-3 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 text-lg font-semibold"
+            className="px-6 py-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 text-lg font-semibold"
           >
             No
           </button>
         </div>
       </div>
 
-      {/* Right Image (Only appears when Yes is clicked) */}
       {showSideImages && (
-        <div className="absolute right-10 transform translate-y-1/2">
+        <div className="absolute right-10 transform translate-1/2">
           <img
             src={boomImage}
             alt="Boom!"
             className="animate-bounce side-image right-image"
-            style={{ width: "500px", height: "500px" }}
+            style={{ width: "500px",height: "500px" }}
           />
         </div>
       )}
